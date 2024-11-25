@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container alert alert-primary" role="alert">
+        <h2>{{ title }}</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div>{{ form.non_field_errors }}</div>
+            {% for field in form %}
+                <p><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}</p>
+            {% endfor %}
+            <p>
+                {#                <input type="submit" class="btn btn-primary" value="Login"> #}
+                <button type="submit" class="btn btn-primary">Вхід</button>
+            </p>
+        </form>
+    </div>
+{% endblock %}

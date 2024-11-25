@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container alert alert-primary" role="alert">
+        <h2>{{ title }}</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div>{{ form.non_field_errors }}</div>
+            {% for field in form %}
+                {% if field.errors %}
+                    <p class="alert alert-danger">
+                        {% for error in field.errors %}{{ error }}{% endfor %}
+                    </p>
+                {% endif %}
+                <p><label>{{ field.label }}</label> {{ field }}</p>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Зареєструватися</button>
+
+        </form>
+    </div>
+{% endblock %}
